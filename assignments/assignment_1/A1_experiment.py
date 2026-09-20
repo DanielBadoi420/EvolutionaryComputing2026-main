@@ -108,8 +108,8 @@ def valid_body(genome: TreeGenome, limit: int) -> bool:
 
 def sample_body(limit: int) -> TreeGenome:
     """Same generator for both EAs' initial populations and all random-search draws.
-    Uniform total size 1..limit, followed by ARIEL's random topology generator.
-    This is NOT uniform sampling over the complete space of tree phenotypes.
+    Uniform total size 1...limit, followed by ARIEL's random topology generator.
+    This is not uniform sampling over the complete space of tree phenotypes.
     In the supplied ARIEL version random_tree(n) adds n nodes to a core.
     """
     total = random.randint(1, limit)
@@ -128,9 +128,8 @@ def tournament(parents: list[Individual], k: int) -> Individual:
 
 def mutate_body(genome: TreeGenome, settings: Settings) -> TreeGenome:
     """Four equally likely mutation attempts; mutation probability is per child.
-
     Add one module; delete a non-core subtree; change one rotation; or apply
-    ARIEL's type-replacement operator (which may prune incompatible children).
+    ARIEL's type-replacement operator (which prunes incompatible children).
     Impossible operations are no-ops, never repeated until improvement.
     """
     child = copy.deepcopy(genome)
