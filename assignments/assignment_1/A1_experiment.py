@@ -1,9 +1,5 @@
-"""Assignment 1: tournament selection (k=2 versus k=5) and random search.
-
-Place beside A1_template_2026.py and tree_edit_distance.py. From the repo root:
-    uv run assignments/assignment_1/A1_experiment.py --pilot
-
-Read A1_RUNME.md before the full experiment. No files in src/ariel are changed.
+"""
+Assignment 1: tournament selection (k=2 versus k=5) and random search.
 """
 import argparse
 import copy
@@ -46,7 +42,7 @@ class Settings:
     population: int = 50
     offspring: int = 50
     generations: int = 100
-    max_modules: int = 20  # TOTAL modules, including the core
+    max_modules: int = 20  #TOTAL modules, including the core
     crossover_rate: float = 0.7
     mutation_rate: float = 0.8
 
@@ -82,7 +78,6 @@ def load_targets() -> tuple[list[nx.DiGraph], list[Path]]:
 
 def body_signature(genome: TreeGenome) -> tuple:
     """Exact rooted graph identity, including labels/faces but ignoring node IDs.
-
     This measures phenotypic richness, not the magnitude of pairwise differences.
     It does not identify physically symmetric bodies under global rotations.
     """
@@ -113,7 +108,6 @@ def valid_body(genome: TreeGenome, limit: int) -> bool:
 
 def sample_body(limit: int) -> TreeGenome:
     """Same generator for both EAs' initial populations and all random-search draws.
-
     Uniform total size 1..limit, followed by ARIEL's random topology generator.
     This is NOT uniform sampling over the complete space of tree phenotypes.
     In the supplied ARIEL version random_tree(n) adds n nodes to a core.
@@ -183,7 +177,7 @@ class Experiment:
         if not valid_body(genome, self.settings.max_modules):
             raise ValueError("An invalid or over-budget body reached evaluation.")
         distances = list(distances_to_targets(genome.to_networkx(), self.targets))
-        # Exact arithmetic and population-SD convention from tree_edit_distance.py.
+        #exact arithmetic and population-SD convention from tree_edit_distance.py.
         mean = sum(distances) / len(distances)
         spread = (sum((d - mean) ** 2 for d in distances) / len(distances)) ** 0.5
         ind = Individual()
@@ -191,7 +185,7 @@ class Experiment:
         ind.fitness = mean + spread
         ind.tags = {"per_target": distances, "modules": len(genome.nodes),
                     "evaluation_index": self.evaluations + 1}
-        # Every proposed valid candidate is scored, including identical copies.
+        #every proposed valid candidate is scored, including identical copies.
         self.evaluations += 1
         if self.best is None or ind.fitness < self.best["fitness"]:
             self.best = {"fitness": ind.fitness, "mean_distance": mean,
@@ -220,7 +214,7 @@ class Experiment:
             for candidate, parent in ((c1, g1), (c2, g2)):
                 if len(children) == self.settings.offspring:
                     break
-                # Revert an invalid/oversized crossover child before mutation.
+                #revert an invalid/oversized crossover child before mutation.
                 if not valid_body(candidate, self.settings.max_modules):
                     candidate = copy.deepcopy(parent)
                 if random.random() < self.settings.mutation_rate:
@@ -233,7 +227,7 @@ class Experiment:
         """One parental elite plus the best mu-1 offspring; random fitness ties."""
         parents = [ind for ind in population if ind.id in self.parent_ids]
         offspring = [ind for ind in population if ind.id not in self.parent_ids]
-        # Fresh children have id=None until EA commits them; parents have DB ids.
+        #fresh children have id=None until EA commits them; parents have DB ids.
         random.shuffle(parents)
         random.shuffle(offspring)
         elite = min(parents, key=lambda ind: ind.fitness)
@@ -270,8 +264,7 @@ class Experiment:
 
     def run(self) -> dict:
         self.folder.mkdir(parents=True, exist_ok=False)
-        # Only Python's random is used by this script and the chosen tree operators.
-        # Reset immediately before initialisation, after all module imports.
+        #reset immediately before initialisation, after all module imports.
         random.seed(self.seed)
         started = time.perf_counter()
         initial = Population([self.evaluate_body(sample_body(self.settings.max_modules))
@@ -280,7 +273,7 @@ class Experiment:
                    [{"genotype": ind.genotype, "fitness": ind.fitness} for ind in initial])
         self.record(initial)
         if self.method == "random":
-            # No selection, inheritance or mutation. Keep a best-so-far record only.
+            #no selection, inheritance or mutation. Keep a best-so-far record only.
             for generation in range(1, self.settings.generations + 1):
                 self.generation = generation
                 batch = Population([self.evaluate_body(sample_body(self.settings.max_modules))
@@ -307,8 +300,8 @@ class Experiment:
                        "evaluations": self.evaluations, "seconds": elapsed,
                        "final_unique_fraction": self.history[-1]["unique_fraction"],
                        "final_mean_modules": self.history[-1]["mean_modules"],
-                       # Best-so-far area: average over the post-initialisation budget.
-                       # Lower means good fitness was found earlier, as well as finally.
+                       #best-so-far area: average over the post-initialisation budget.
+                       #lower means good fitness was found earlier, as well as finally.
                        "convergence_auc": sum(
                            (a["best_so_far"] + b["best_so_far"]) / 2
                            * (b["evaluations"] - a["evaluations"])
@@ -365,7 +358,7 @@ def aggregate(output: Path) -> None:
     write_csv(output / "summary.csv", summary)
     write_csv(output / "per_target_summary.csv", targets)
     write_csv(output / "curves_summary.csv", curve_rows)
-    # Within-seed differences acknowledge the matched initial population design.
+    #within-seed differences acknowledge the matched initial population design.
     paired = []
     if all(method in setup["methods"] for method in ("ea_k2", "ea_k5")):
         for seed in setup["seeds"]:
@@ -468,7 +461,6 @@ def main() -> None:
     parser.add_argument("--mutation-rate", type=float, default=0.8)
     args = parser.parse_args()
     if args.render_best:
-        # Lazy import: MuJoCo and torch are needed only for this optional rendering.
         from A1_template_2026 import show_body
         graph = nx.node_link_graph(json.loads(args.render_best.read_text(encoding="utf-8")), edges="edges")
         show_body(graph, mode="frame", file_name=args.render_best.parent.parent.name + "_" + args.render_best.parent.name)
