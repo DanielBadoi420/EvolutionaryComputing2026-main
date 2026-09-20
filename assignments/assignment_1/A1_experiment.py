@@ -1,5 +1,11 @@
 """
 Assignment 1: tournament selection (k=2 versus k=5) and random search.
+
+To run write: 
+uv run assignments/assignment_1/A1_experiment.py --output __data__/a1_full
+in the main directory.
+
+It saves the results in __data__/a1_full
 """
 import argparse
 import copy
