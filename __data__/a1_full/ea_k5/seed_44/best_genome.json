@@ -1,0 +1,136 @@
+{
+  "nodes": {
+    "0": {
+      "type": "CORE",
+      "rotation": "DEG_0"
+    },
+    "1": {
+      "type": "BRICK",
+      "rotation": "DEG_90"
+    },
+    "3": {
+      "type": "HINGE",
+      "rotation": "DEG_0"
+    },
+    "6": {
+      "type": "BRICK",
+      "rotation": "DEG_0"
+    },
+    "15": {
+      "type": "BRICK",
+      "rotation": "DEG_45"
+    },
+    "16": {
+      "type": "BRICK",
+      "rotation": "DEG_45"
+    },
+    "17": {
+      "type": "BRICK",
+      "rotation": "DEG_0"
+    },
+    "19": {
+      "type": "HINGE",
+      "rotation": "DEG_90"
+    },
+    "22": {
+      "type": "HINGE",
+      "rotation": "DEG_0"
+    },
+    "23": {
+      "type": "BRICK",
+      "rotation": "DEG_90"
+    },
+    "26": {
+      "type": "HINGE",
+      "rotation": "DEG_45"
+    },
+    "27": {
+      "type": "BRICK",
+      "rotation": "DEG_0"
+    },
+    "28": {
+      "type": "HINGE",
+      "rotation": "DEG_0"
+    },
+    "29": {
+      "type": "HINGE",
+      "rotation": "DEG_90"
+    },
+    "30": {
+      "type": "HINGE",
+      "rotation": "DEG_45"
+    }
+  },
+  "edges": [
+    {
+      "parent": 0,
+      "child": 1,
+      "face": "LEFT"
+    },
+    {
+      "parent": 0,
+      "child": 3,
+      "face": "RIGHT"
+    },
+    {
+      "parent": 0,
+      "child": 6,
+      "face": "BACK"
+    },
+    {
+      "parent": 15,
+      "child": 16,
+      "face": "BOTTOM"
+    },
+    {
+      "parent": 16,
+      "child": 17,
+      "face": "FRONT"
+    },
+    {
+      "parent": 16,
+      "child": 19,
+      "face": "RIGHT"
+    },
+    {
+      "parent": 15,
+      "child": 22,
+      "face": "FRONT"
+    },
+    {
+      "parent": 6,
+      "child": 15,
+      "face": "LEFT"
+    },
+    {
+      "parent": 1,
+      "child": 23,
+      "face": "BOTTOM"
+    },
+    {
+      "parent": 3,
+      "child": 26,
+      "face": "FRONT"
+    },
+    {
+      "parent": 27,
+      "child": 28,
+      "face": "LEFT"
+    },
+    {
+      "parent": 17,
+      "child": 27,
+      "face": "BOTTOM"
+    },
+    {
+      "parent": 27,
+      "child": 29,
+      "face": "BOTTOM"
+    },
+    {
+      "parent": 6,
+      "child": 30,
+      "face": "TOP"
+    }
+  ]
+}

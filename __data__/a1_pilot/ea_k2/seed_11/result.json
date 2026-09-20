@@ -1,0 +1,22 @@
+{
+  "fitness": 16.60208288141719,
+  "mean_distance": 11.8,
+  "std_across_targets": 4.802082881417188,
+  "per_target": [
+    6.5,
+    7.0,
+    12.0,
+    14.0,
+    19.5
+  ],
+  "modules": 7,
+  "generation": 2,
+  "evaluation_index": 27,
+  "method": "ea_k2",
+  "seed": 11,
+  "evaluations": 60,
+  "seconds": 0.393166800000472,
+  "final_unique_fraction": 1.0,
+  "final_mean_modules": 6.3,
+  "convergence_auc": 16.889209580263003
+}

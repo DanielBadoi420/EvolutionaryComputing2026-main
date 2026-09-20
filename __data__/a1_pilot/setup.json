@@ -1,0 +1,88 @@
+{
+  "settings": {
+    "population": 10,
+    "offspring": 10,
+    "generations": 5,
+    "max_modules": 20,
+    "crossover_rate": 0.7,
+    "mutation_rate": 0.8
+  },
+  "methods": [
+    "ea_k2",
+    "ea_k5",
+    "random"
+  ],
+  "seeds": [
+    11,
+    22
+  ],
+  "pilot": true,
+  "budget_per_run": 60,
+  "created": "2026-09-20T20:16:44.431036",
+  "python": "3.12.9 (main, Mar 17 2025, 21:06:20) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "networkx": "3.5",
+    "numpy": "2.3.3",
+    "sqlmodel": "0.0.27",
+    "sqlalchemy": "2.0.43",
+    "pydantic": "2.12.0",
+    "pydantic-settings": "2.11.0",
+    "rich": "14.1.0",
+    "matplotlib": "3.10.7"
+  },
+  "targets": [
+    {
+      "name": "target_00.json",
+      "sha256": "dc295346bfef4ebde33d4a1aa24d94887b8a36cba8a72ccc3130516c50c18403"
+    },
+    {
+      "name": "target_01.json",
+      "sha256": "9950b61a7edc2f35dad6a41dc56d47ba38952966d1e1625d6790f1d775ea8374"
+    },
+    {
+      "name": "target_02.json",
+      "sha256": "c68f0dcd867623d71289ca819eef10e845a1be1f05525579ed3e06efb609dd4c"
+    },
+    {
+      "name": "target_03.json",
+      "sha256": "e839eb3d1c76caa225dc9fda980e9f2f28603e6b0f695403a7be52b0489b9f28"
+    },
+    {
+      "name": "target_04.json",
+      "sha256": "74f606aebd83c681de3a4821d4b9996299e9cb9abe8a4d8d616499abf39627de"
+    }
+  ],
+  "source_sha256": {
+    "A1_experiment.py": "d8cc8a3dfdebc187e44423e0393fd82831a08c22ed068583f28066dc7261300b",
+    "tree_edit_distance.py": "98be067ff6a409f05b0acc203f94180b27326f6bd15d945d50c095f65838bc7b",
+    "ec\\__init__.py": "862e9fcd246fc4221b738bd9c7f754767f028a477386ea36c739800eb89a4258",
+    "ec\\archive.py": "a5896752fbf8587512bb86d3a6c3412f440b593a2b4915b651647816e5e1b0b0",
+    "ec\\crossover.py": "2e9b5d761f3e09afd0972aa4f0402bfa6d1ded7c0694f7027b79285059e75c91",
+    "ec\\ea.py": "bc26bd894d4db1611d36b14b2e5ef2f0b0cf0db6cd45534022dd5f8cc6f92f7c",
+    "ec\\generators copy.py": "ca0c5901c2f1f71e01201a455b377a1781dd3c80293938cf02d0025c44e00a8c",
+    "ec\\generators.py": "86ef8b80a65347c64573ccb0804a930d33aa28822fba8ae3902f9931a7f549a9",
+    "ec\\genotypes\\__init__.py": "c85667fdf3939bdc5abd55c5737dcc2f254e97482ca7901bd37e762c42f0f9a2",
+    "ec\\genotypes\\cppn\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "ec\\genotypes\\cppn\\cppn_decoding.py": "dbe8782b04c80982336754140946c2f6b4b0476f63a5f63616a5f1aad023c3ac",
+    "ec\\genotypes\\nde\\__init__.py": "fa64f93c637ed125d5b738db76d5b22700a9491740512e055c349d9927f2812a",
+    "ec\\genotypes\\nde\\nde.py": "3e708701ba0f6b6ea703a756693168f0ab9bef6d581eb1f3fd318512ac873809",
+    "ec\\genotypes\\tree\\__init__.py": "8abf9fa5a5b62e6b0826a1275284948642339ea485269926e17f905aafa042d3",
+    "ec\\genotypes\\tree\\io.py": "5c4278a0e83f8730dd9411abd61d15f3270fea67473efe999fa16eedf5ffc72a",
+    "ec\\genotypes\\tree\\operators.py": "046bcaeb31e966464347370e1e379d75cef94d8728a2eef2a0fdd1d522f51be0",
+    "ec\\genotypes\\tree\\tree_genome.py": "92263542813ae6bf137c595d367d28ad3efbd67bc40c49d97d90c5998bda6935",
+    "ec\\genotypes\\tree\\validation.py": "216f8fb8212a80c7810de7bbde15732d8640f0c50ffc9e644a137f0d1c8ad920",
+    "ec\\individual.py": "3bb5a6450598b21262f872b523d8d661d35411cc527f4d708b8c51e679943102",
+    "ec\\population.py": "5492f82f626301d016aa94318d332d993ac1f2ea22e59388f11c6cacdb83385e",
+    "body_phenotypes\\robogen_lite\\config.py": "afc01e5ff9831a9f33227123d28cca29bbf4bae3f55cf8900c53ba74fceda667"
+  },
+  "initialisation": "Uniform total size 1..max_modules; ARIEL random_tree(total-1)",
+  "parent_selection": "k-tournament with replacement; random ties",
+  "survivor_selection": "One parental elite plus best population-1 offspring; random ties",
+  "mutation": "Per-child probability; equal add/delete-subtree/rotation/type attempts",
+  "constraint_handling": "Invalid or oversized variation reverts to preceding valid body",
+  "diversity": "Fraction of distinct rooted labelled graphs, including faces, ignoring node IDs",
+  "fitness_sd": "Population SD across targets (ddof=0)",
+  "reported_run_sd": "Sample SD across independent runs (ddof=1)",
+  "random_population_statistics": "Fresh candidate batches, not selected EA populations"
+}
