@@ -1,0 +1,190 @@
+<mujoco model="Simple Flat World">
+  <compiler angle="radian"/>
+
+  <option impratio="3" integrator="implicitfast"/>
+
+  <visual>
+    <global azimuth="140" elevation="-20" offwidth="1280" offheight="960"/>
+    <quality shadowsize="8192"/>
+    <headlight diffuse="0.6 0.6 0.6" specular="0.9 0.9 0.9"/>
+    <map force="0.01"/>
+    <scale forcewidth="0.3" contactwidth="0.5" contactheight="0.2"/>
+    <rgba haze="0.15 0.25 0.35 1" force="1 0 0 1"/>
+  </visual>
+
+  <default>
+    <default class="robot1_main">
+      <default class="robot1_hinge_0main"/>
+      <default class="robot1_brick_0main"/>
+      <default class="robot1_hinge_1main"/>
+      <default class="robot1_brick_1main"/>
+      <default class="robot1_hinge_2main"/>
+      <default class="robot1_brick_2main"/>
+      <default class="robot1_hinge_3main"/>
+      <default class="robot1_brick_3main"/>
+      <default class="robot1_hinge_4main"/>
+      <default class="robot1_brick_4main"/>
+      <default class="robot1_hinge_5main"/>
+      <default class="robot1_brick_5main"/>
+    </default>
+  </default>
+
+  <asset>
+    <texture type="skybox" colorspace="auto" builtin="gradient" rgb1="0.239216 0.639216 0.701961" rgb2="0.321569 0.223529 0.6" width="512" height="3072"/>
+    <texture type="2d" colorspace="auto" name="floor" builtin="checker" rgb1="0.1 0.2 0.3" rgb2="0.2 0.3 0.4" width="600" height="600"/>
+    <material name="floor" texture="floor" texuniform="true" texrepeat="3 3"/>
+    <mesh name="boxmesh_0" vertex="-0.075 -0.075 -0.075 -0.075 -0.075 0.075 -0.075 0.075 -0.075 -0.075 0.075 0.075 0.075 -0.075 -0.075 0.075 -0.075 0.075 0.075 0.075 -0.075 0.075 0.075 0.075"/>
+    <mesh name="boxmesh_1" vertex="-0.02574 -0.0185625 -0.02574 -0.02574 -0.0185625 0.02574 -0.02574 0.0185625 -0.02574 -0.02574 0.0185625 0.02574 0.02574 -0.0185625 -0.02574 0.02574 -0.0185625 0.02574 0.02574 0.0185625 -0.02574 0.02574 0.0185625 0.02574"/>
+    <mesh name="boxmesh_2" vertex="-0.026 -0.01875 -0.026 -0.026 -0.01875 0.026 -0.026 0.01875 -0.026 -0.026 0.01875 0.026 0.026 -0.01875 -0.026 0.026 -0.01875 0.026 0.026 0.01875 -0.026 0.026 0.01875 0.026"/>
+    <mesh name="boxmesh_3" vertex="-0.0375 -0.0375 -0.0375 -0.0375 -0.0375 0.0375 -0.0375 0.0375 -0.0375 -0.0375 0.0375 0.0375 0.0375 -0.0375 -0.0375 0.0375 -0.0375 0.0375 0.0375 0.0375 -0.0375 0.0375 0.0375 0.0375"/>
+  </asset>
+
+  <worldbody>
+    <site pos="0 0 0.1"/>
+    <camera name="ortho-cam" pos="-5 0 5" quat="0.653281 0.270598 -0.270598 -0.653281" projection="orthographic" fovy="5"/>
+    <camera name="pretty-cam" pos="-0.015 -3.003 1.765" quat="0.868035 0.496497 -0.00124123 -0.00217007"/>
+    <light name="light" pos="0 0 1" dir="0 0 -1" type="directional" castshadow="false"/>
+    <body name="floor">
+      <geom name="floor" size="5 5 0.5" type="plane" friction="0.45 0.05" solref="0.005" material="floor"/>
+    </body>
+    <body name="robot1_world" pos="0 0 0.085">
+      <joint type="free"/>
+      <body name="robot1_core">
+        <geom name="robot1_core" pos="0 0.075 0" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="1.36335" rgba="0.992157 0.792157 0.25098 1" mesh="boxmesh_0"/>
+        <site name="robot1_core-front" pos="0 0.15 -0.0375"/>
+        <site name="robot1_core-back" pos="0 0 -0.0375" quat="0 0 0 1"/>
+        <site name="robot1_core-left" pos="-0.075 0.075 -0.0375" quat="0.707107 0 0 0.707107"/>
+        <site name="robot1_core-right" pos="0.075 0.075 -0.0375" quat="-0.707107 0 0 0.707107"/>
+        <site name="robot1_core-top" pos="0 0.075 0.075" quat="0.707107 0.707107 0 0"/>
+        <site name="robot1_core-bottom" pos="0 0.075 -0.075" quat="0 0 -0.707107 0.707107"/>
+        <camera name="robot1_core_mycamera" pos="0 0 0.055" quat="0 0 0.707107 0.707107"/>
+        <body name="robot1_hinge_0hinge" pos="0 0.15 -0.0375">
+          <body name="robot1_hinge_0stator" pos="0 0.01875 0">
+            <geom name="robot1_hinge_0stator" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.088146" rgba="0.87451 0.160784 0.207843 1" mesh="boxmesh_1"/>
+          </body>
+          <body name="robot1_hinge_0rotor" pos="0 0.05625 0">
+            <joint name="robot1_hinge_0servo" pos="0 -0.01875 0" axis="0 0 1" solreflimit="0.01" limited="true" range="-1.5708 1.5708" armature="0.001" damping="0.227561" frictionloss="0.05"/>
+            <geom name="robot1_hinge_0rotor" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.016488" rgba="0.627451 0.0941176 0.129412 1" mesh="boxmesh_2"/>
+            <site name="robot1_hinge_0hinge-front" pos="0 0.01875 0"/>
+            <body name="robot1_brick_0brick" pos="0 0.01875 0">
+              <geom name="robot1_brick_0brick" pos="0 0.0375 0" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.059043" rgba="0.109804 0.466667 0.764706 1" mesh="boxmesh_3"/>
+              <site name="robot1_brick_0brick-front" pos="0 0.075 0"/>
+              <site name="robot1_brick_0brick-left" pos="-0.0375 0.0375 0" quat="0.707107 0 0 0.707107"/>
+              <site name="robot1_brick_0brick-right" pos="0.0375 0.0375 0" quat="-0.707107 0 0 0.707107"/>
+              <site name="robot1_brick_0brick-top" pos="0 0.0375 0.0375" quat="0.707107 0.707107 0 0"/>
+              <site name="robot1_brick_0brick-bottom" pos="0 0.0375 -0.0375" quat="0 0 -0.707107 0.707107"/>
+              <body name="robot1_hinge_1hinge" pos="0 0.075 0">
+                <body name="robot1_hinge_1stator" pos="0 0.01875 0">
+                  <geom name="robot1_hinge_1stator" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.088146" rgba="0.87451 0.160784 0.207843 1" mesh="boxmesh_1"/>
+                </body>
+                <body name="robot1_hinge_1rotor" pos="0 0.05625 0">
+                  <joint name="robot1_hinge_1servo" pos="0 -0.01875 0" axis="0 0 1" solreflimit="0.01" limited="true" range="-1.5708 1.5708" armature="0.001" damping="0.227561" frictionloss="0.05"/>
+                  <geom name="robot1_hinge_1rotor" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.016488" rgba="0.627451 0.0941176 0.129412 1" mesh="boxmesh_2"/>
+                  <site name="robot1_hinge_1hinge-front" pos="0 0.01875 0"/>
+                  <body name="robot1_brick_1brick" pos="0 0.01875 0">
+                    <geom name="robot1_brick_1brick" pos="0 0.0375 0" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.059043" rgba="0.109804 0.466667 0.764706 1" mesh="boxmesh_3"/>
+                    <site name="robot1_brick_1brick-front" pos="0 0.075 0"/>
+                    <site name="robot1_brick_1brick-left" pos="-0.0375 0.0375 0" quat="0.707107 0 0 0.707107"/>
+                    <site name="robot1_brick_1brick-right" pos="0.0375 0.0375 0" quat="-0.707107 0 0 0.707107"/>
+                    <site name="robot1_brick_1brick-top" pos="0 0.0375 0.0375" quat="0.707107 0.707107 0 0"/>
+                    <site name="robot1_brick_1brick-bottom" pos="0 0.0375 -0.0375" quat="0 0 -0.707107 0.707107"/>
+                    <body name="robot1_hinge_2hinge" pos="-0.0375 0.0375 0" quat="0.5 -0.5 0.5 0.5">
+                      <body name="robot1_hinge_2stator" pos="0 0.01875 0">
+                        <geom name="robot1_hinge_2stator" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.088146" rgba="0.87451 0.160784 0.207843 1" mesh="boxmesh_1"/>
+                      </body>
+                      <body name="robot1_hinge_2rotor" pos="0 0.05625 0">
+                        <joint name="robot1_hinge_2servo" pos="0 -0.01875 0" axis="0 0 1" solreflimit="0.01" limited="true" range="-1.5708 1.5708" armature="0.001" damping="0.227561" frictionloss="0.05"/>
+                        <geom name="robot1_hinge_2rotor" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.016488" rgba="0.627451 0.0941176 0.129412 1" mesh="boxmesh_2"/>
+                        <site name="robot1_hinge_2hinge-front" pos="0 0.01875 0"/>
+                        <body name="robot1_brick_2brick" pos="0 0.01875 0">
+                          <geom name="robot1_brick_2brick" pos="0 0.0375 0" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.059043" rgba="0.109804 0.466667 0.764706 1" mesh="boxmesh_3"/>
+                          <site name="robot1_brick_2brick-front" pos="0 0.075 0"/>
+                          <site name="robot1_brick_2brick-left" pos="-0.0375 0.0375 0" quat="0.707107 0 0 0.707107"/>
+                          <site name="robot1_brick_2brick-right" pos="0.0375 0.0375 0" quat="-0.707107 0 0 0.707107"/>
+                          <site name="robot1_brick_2brick-top" pos="0 0.0375 0.0375" quat="0.707107 0.707107 0 0"/>
+                          <site name="robot1_brick_2brick-bottom" pos="0 0.0375 -0.0375" quat="0 0 -0.707107 0.707107"/>
+                        </body>
+                      </body>
+                    </body>
+                    <body name="robot1_hinge_3hinge" pos="0.0375 0.0375 0" quat="-0.5 -0.5 -0.5 0.5">
+                      <body name="robot1_hinge_3stator" pos="0 0.01875 0">
+                        <geom name="robot1_hinge_3stator" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.088146" rgba="0.87451 0.160784 0.207843 1" mesh="boxmesh_1"/>
+                      </body>
+                      <body name="robot1_hinge_3rotor" pos="0 0.05625 0">
+                        <joint name="robot1_hinge_3servo" pos="0 -0.01875 0" axis="0 0 1" solreflimit="0.01" limited="true" range="-1.5708 1.5708" armature="0.001" damping="0.227561" frictionloss="0.05"/>
+                        <geom name="robot1_hinge_3rotor" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.016488" rgba="0.627451 0.0941176 0.129412 1" mesh="boxmesh_2"/>
+                        <site name="robot1_hinge_3hinge-front" pos="0 0.01875 0"/>
+                        <body name="robot1_brick_3brick" pos="0 0.01875 0">
+                          <geom name="robot1_brick_3brick" pos="0 0.0375 0" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.059043" rgba="0.109804 0.466667 0.764706 1" mesh="boxmesh_3"/>
+                          <site name="robot1_brick_3brick-front" pos="0 0.075 0"/>
+                          <site name="robot1_brick_3brick-left" pos="-0.0375 0.0375 0" quat="0.707107 0 0 0.707107"/>
+                          <site name="robot1_brick_3brick-right" pos="0.0375 0.0375 0" quat="-0.707107 0 0 0.707107"/>
+                          <site name="robot1_brick_3brick-top" pos="0 0.0375 0.0375" quat="0.707107 0.707107 0 0"/>
+                          <site name="robot1_brick_3brick-bottom" pos="0 0.0375 -0.0375" quat="0 0 -0.707107 0.707107"/>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+        <body name="robot1_hinge_4hinge" pos="0.075 0.075 -0.0375" quat="-0.5 -0.5 -0.5 0.5">
+          <body name="robot1_hinge_4stator" pos="0 0.01875 0">
+            <geom name="robot1_hinge_4stator" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.088146" rgba="0.87451 0.160784 0.207843 1" mesh="boxmesh_1"/>
+          </body>
+          <body name="robot1_hinge_4rotor" pos="0 0.05625 0">
+            <joint name="robot1_hinge_4servo" pos="0 -0.01875 0" axis="0 0 1" solreflimit="0.01" limited="true" range="-1.5708 1.5708" armature="0.001" damping="0.227561" frictionloss="0.05"/>
+            <geom name="robot1_hinge_4rotor" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.016488" rgba="0.627451 0.0941176 0.129412 1" mesh="boxmesh_2"/>
+            <site name="robot1_hinge_4hinge-front" pos="0 0.01875 0"/>
+            <body name="robot1_brick_4brick" pos="0 0.01875 0">
+              <geom name="robot1_brick_4brick" pos="0 0.0375 0" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.059043" rgba="0.109804 0.466667 0.764706 1" mesh="boxmesh_3"/>
+              <site name="robot1_brick_4brick-front" pos="0 0.075 0"/>
+              <site name="robot1_brick_4brick-left" pos="-0.0375 0.0375 0" quat="0.707107 0 0 0.707107"/>
+              <site name="robot1_brick_4brick-right" pos="0.0375 0.0375 0" quat="-0.707107 0 0 0.707107"/>
+              <site name="robot1_brick_4brick-top" pos="0 0.0375 0.0375" quat="0.707107 0.707107 0 0"/>
+              <site name="robot1_brick_4brick-bottom" pos="0 0.0375 -0.0375" quat="0 0 -0.707107 0.707107"/>
+            </body>
+          </body>
+        </body>
+        <body name="robot1_hinge_5hinge" pos="-0.075 0.075 -0.0375" quat="0.5 -0.5 0.5 0.5">
+          <body name="robot1_hinge_5stator" pos="0 0.01875 0">
+            <geom name="robot1_hinge_5stator" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.088146" rgba="0.87451 0.160784 0.207843 1" mesh="boxmesh_1"/>
+          </body>
+          <body name="robot1_hinge_5rotor" pos="0 0.05625 0">
+            <joint name="robot1_hinge_5servo" pos="0 -0.01875 0" axis="0 0 1" solreflimit="0.01" limited="true" range="-1.5708 1.5708" armature="0.001" damping="0.227561" frictionloss="0.05"/>
+            <geom name="robot1_hinge_5rotor" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.016488" rgba="0.627451 0.0941176 0.129412 1" mesh="boxmesh_2"/>
+            <site name="robot1_hinge_5hinge-front" pos="0 0.01875 0"/>
+            <body name="robot1_brick_5brick" pos="0 0.01875 0">
+              <geom name="robot1_brick_5brick" pos="0 0.0375 0" type="mesh" contype="2" conaffinity="3" friction="0.45 0.05" solref="0.014" mass="0.059043" rgba="0.109804 0.466667 0.764706 1" mesh="boxmesh_3"/>
+              <site name="robot1_brick_5brick-front" pos="0 0.075 0"/>
+              <site name="robot1_brick_5brick-left" pos="-0.0375 0.0375 0" quat="0.707107 0 0 0.707107"/>
+              <site name="robot1_brick_5brick-right" pos="0.0375 0.0375 0" quat="-0.707107 0 0 0.707107"/>
+              <site name="robot1_brick_5brick-top" pos="0 0.0375 0.0375" quat="0.707107 0.707107 0 0"/>
+              <site name="robot1_brick_5brick-bottom" pos="0 0.0375 -0.0375" quat="0 0 -0.707107 0.707107"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <contact>
+    <exclude body1="robot1_hinge_0stator" body2="robot1_hinge_0rotor"/>
+    <exclude body1="robot1_hinge_1stator" body2="robot1_hinge_1rotor"/>
+    <exclude body1="robot1_hinge_2stator" body2="robot1_hinge_2rotor"/>
+    <exclude body1="robot1_hinge_3stator" body2="robot1_hinge_3rotor"/>
+    <exclude body1="robot1_hinge_4stator" body2="robot1_hinge_4rotor"/>
+    <exclude body1="robot1_hinge_5stator" body2="robot1_hinge_5rotor"/>
+  </contact>
+
+  <actuator>
+    <general name="robot1_hinge_0servo" joint="robot1_hinge_0servo" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-0.661949 0.661949" dynprm="0 0 0 0 0 0 0 0 0 0" biastype="affine" gainprm="10" biasprm="0 -10"/>
+    <general name="robot1_hinge_1servo" joint="robot1_hinge_1servo" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-0.661949 0.661949" dynprm="0 0 0 0 0 0 0 0 0 0" biastype="affine" gainprm="10" biasprm="0 -10"/>
+    <general name="robot1_hinge_2servo" joint="robot1_hinge_2servo" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-0.661949 0.661949" dynprm="0 0 0 0 0 0 0 0 0 0" biastype="affine" gainprm="10" biasprm="0 -10"/>
+    <general name="robot1_hinge_3servo" joint="robot1_hinge_3servo" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-0.661949 0.661949" dynprm="0 0 0 0 0 0 0 0 0 0" biastype="affine" gainprm="10" biasprm="0 -10"/>
+    <general name="robot1_hinge_4servo" joint="robot1_hinge_4servo" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-0.661949 0.661949" dynprm="0 0 0 0 0 0 0 0 0 0" biastype="affine" gainprm="10" biasprm="0 -10"/>
+    <general name="robot1_hinge_5servo" joint="robot1_hinge_5servo" ctrlrange="-1.5708 1.5708" forcelimited="true" forcerange="-0.661949 0.661949" dynprm="0 0 0 0 0 0 0 0 0 0" biastype="affine" gainprm="10" biasprm="0 -10"/>
+  </actuator>
+</mujoco>
