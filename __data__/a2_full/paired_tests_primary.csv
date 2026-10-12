@@ -1,0 +1,4 @@
+comparison,primary_generation,pairs,nonzero_pairs,mean_difference_m,median_difference_m,bootstrap_mean_ci_low,bootstrap_mean_ci_high,signed_rank_biserial,p_raw,test_method,p_holm,reject_at_0_05
+adaptive_minus_fixed_small,100,10,10,-0.3542950032650725,-0.18267933036321693,-0.574951574423777,-0.15616027274930025,-0.9636363636363636,0.00390625,exact_sign_enumeration,0.0078125,True
+adaptive_minus_fixed_large,100,10,10,-0.17357230380050787,-0.15277956623298072,-0.35633030883757977,-0.0016317173396606665,-0.5636363636363636,0.130859375,exact_sign_enumeration,0.130859375,False
+adaptive_minus_random,100,10,10,-0.7595413829708619,-0.756616376116918,-0.8456835762410189,-0.6603152503883242,-1.0,0.001953125,exact_sign_enumeration,0.005859375,True
